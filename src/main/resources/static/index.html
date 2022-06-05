@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cos</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+
+</head>
+<body>
+<div id="cos-1" >
+    <ul>
+        <li v-for="it in message" >
+            {{it}}
+        </li>
+    </ul>
+</div>
+
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+            el: "#cos-1",
+            data: {
+                message:{},
+            },
+            created: function () {
+                this.$http.get('/Cos').then(response => {
+                    this.message=response.data;
+                }, response => {
+                    console.log("error");
+                });
+            },
+            methods:{
+            }
+        }
+    )
+</script>
+</html>

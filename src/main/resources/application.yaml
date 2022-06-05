@@ -1,0 +1,36 @@
+logging:
+  level:
+    com:
+      example:
+        userMapper: debug
+server:
+  port: 8080
+spring:
+  datasource:
+    password: 430124hr
+    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+  profiles:
+    active: dev
+  web:
+    resources:
+      static-locations: classpath:/templates/
+  mail:
+    host: smtp.qq.com
+    protocol: smtp
+    default-encoding: UTF-8
+    username: 2468805105@qq.com
+    password: livwjxgrlbynebgf
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+tencent-cos:
+  region: ap-shanghai
+  secret-id: AKID0mHWUBcmOp0uYuznMglbASTFk11kCNIx
+  secret-key: QaU8VbQyFFzSfaFciX5MQDjywd3C6j5B
+
