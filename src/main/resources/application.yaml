@@ -7,7 +7,7 @@ server:
   port: 8080
 spring:
   datasource:
-    password: 430124hr
+    password: roo
     url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
   profiles:

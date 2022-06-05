@@ -1,15 +1,10 @@
 package com.mall_of329.control;
 
-import com.alibaba.fastjson.JSONObject;
 import com.mall_of329.base.ResultUtils;
-import com.mall_of329.service.serverImpl;
 import com.mall_of329.user.user;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author huangRong

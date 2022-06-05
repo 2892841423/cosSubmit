@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableScheduling
-@MapperScan("com/example/cossubmit/mapper")
+@MapperScan("com/example/cossubmit/userMapper")
 public class CosSubmitApplication {
     public static void main(String[] args) {
         SpringApplication.run(CosSubmitApplication.class, args);
