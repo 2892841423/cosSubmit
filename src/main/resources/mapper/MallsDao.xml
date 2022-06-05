@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall_of329.dao.MallsDao">
+
+    <resultMap id="BaseResultMap" type="com.mall_of329.entity.Malls">
+        <!--@Table malls-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="mallname" column="mallName" jdbcType="VARCHAR"/>
+        <result property="shipperaddress" column="shipperAddress" jdbcType="VARCHAR"/>
+        <result property="userid" column="userId" jdbcType="VARCHAR"/>
+        <result property="logal" column="logal" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, mallName, shipperAddress, userId, logal
+        from mall_of_329.malls
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, mallName, shipperAddress, userId, logal
+        from mall_of_329.malls
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, mallName, shipperAddress, userId, logal
+        from mall_of_329.malls
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="mallname != null and mallname != ''">
+                and mallName = #{mallname}
+            </if>
+            <if test="shipperaddress != null and shipperaddress != ''">
+                and shipperAddress = #{shipperaddress}
+            </if>
+            <if test="userid != null and userid != ''">
+                and userId = #{userid}
+            </if>
+            <if test="logal != null and logal != ''">
+                and logal = #{logal}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mall_of_329.malls(mallName, shipperAddress, userId, logal)
+        values (#{mallname}, #{shipperaddress}, #{userid}, #{logal})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mall_of_329.malls
+        <set>
+            <if test="mallname != null and mallname != ''">
+                mallName = #{mallname},
+            </if>
+            <if test="shipperaddress != null and shipperaddress != ''">
+                shipperAddress = #{shipperaddress},
+            </if>
+            <if test="userid != null and userid != ''">
+                userId = #{userid},
+            </if>
+            <if test="logal != null and logal != ''">
+                logal = #{logal},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from mall_of_329.malls where id = #{id}
+    </delete>
+
+</mapper>

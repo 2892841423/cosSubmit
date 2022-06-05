@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall_of329.dao.ProductsDao">
+
+    <resultMap id="BaseResultMap" type="com.mall_of329.entity.Products">
+        <!--@Table products-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="goodsname" column="goodsName" jdbcType="VARCHAR"/>
+        <result property="introduction" column="introduction" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="INTEGER"/>
+        <result property="rest" column="rest" jdbcType="INTEGER"/>
+        <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        <result property="sales" column="sales" jdbcType="INTEGER"/>
+        <result property="mallid" column="mallId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, goodsName, introduction, price, rest, photo, sales, mallId
+        from mall_of_329.products
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, goodsName, introduction, price, rest, photo, sales, mallId
+        from mall_of_329.products
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, goodsName, introduction, price, rest, photo, sales, mallId
+        from mall_of_329.products
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="goodsname != null and goodsname != ''">
+                and goodsName = #{goodsname}
+            </if>
+            <if test="introduction != null and introduction != ''">
+                and introduction = #{introduction}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="rest != null">
+                and rest = #{rest}
+            </if>
+            <if test="photo != null and photo != ''">
+                and photo = #{photo}
+            </if>
+            <if test="sales != null">
+                and sales = #{sales}
+            </if>
+            <if test="mallid != null and mallid != ''">
+                and mallId = #{mallid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mall_of_329.products(goodsName, introduction, price, rest, photo, sales, mallId)
+        values (#{goodsname}, #{introduction}, #{price}, #{rest}, #{photo}, #{sales}, #{mallid})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mall_of_329.products
+        <set>
+            <if test="goodsname != null and goodsname != ''">
+                goodsName = #{goodsname},
+            </if>
+            <if test="introduction != null and introduction != ''">
+                introduction = #{introduction},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="rest != null">
+                rest = #{rest},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+            <if test="sales != null">
+                sales = #{sales},
+            </if>
+            <if test="mallid != null and mallid != ''">
+                mallId = #{mallid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from mall_of_329.products where id = #{id}
+    </delete>
+
+</mapper>
