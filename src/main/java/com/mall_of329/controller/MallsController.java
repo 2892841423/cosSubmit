@@ -16,10 +16,11 @@ import javax.annotation.Resource;
 @RequestMapping("malls")
 public class MallsController {
     /**
-     * 服务对象
+     * 服务对象1
      */
     @Resource
     private MallsService mallsService;
+
 
     /**
      * 通过主键查询单条数据
