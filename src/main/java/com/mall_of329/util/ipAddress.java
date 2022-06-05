@@ -1,4 +1,4 @@
-package com.mall_of329.service;
+package com.mall_of329.util;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -15,12 +15,13 @@ import java.util.Map;
  * @author huangRong
  * @date 2021/10/25 22:57
  */
-public  class ipAddress {
+public class ipAddress {
     //使用腾讯的接口通过ip拿到城市信息
     private static final String KEY = "MO4BZ-V5564-MTBU7-XR6ZN-4P3NZ-33BLA";
 
     /**
      * 返回IP地址所对应的城市信息
+     *
      * @param ip
      * @return
      */
@@ -45,6 +46,7 @@ public  class ipAddress {
 
     /**
      * 根据在腾讯位置服务上申请的key进行请求操作
+     *
      * @param ip
      * @param key
      * @return
@@ -96,6 +98,7 @@ public  class ipAddress {
 
     /**
      * 获取客户端的IP地址
+     *
      * @param request
      * @return
      */

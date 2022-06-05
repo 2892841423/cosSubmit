@@ -3,8 +3,8 @@ package com.mall_of329.control;
 import com.alibaba.fastjson.JSONObject;
 import com.mall_of329.base.BaseResponse;
 import com.mall_of329.base.ResultUtils;
-import com.mall_of329.service.TencentCosManager;
-import com.mall_of329.service.ipAddress;
+import com.mall_of329.util.TencentCosManager;
+import com.mall_of329.util.ipAddress;
 import com.mall_of329.util.mailSend;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class CosSubmitcontrol {
     @Autowired
     private mailSend emailService;
 
-    private final ipAddress ipAdd=new ipAddress();
+    private final ipAddress ipAdd = new ipAddress();
 
 //    /**
 //     *
@@ -50,6 +50,7 @@ public class CosSubmitcontrol {
 
     /**
      * 上传文件到腾讯Cos
+     *
      * @param file
      * @return
      * @throws IOException
@@ -75,31 +76,32 @@ public class CosSubmitcontrol {
 
     /**
      * 邮件发送
+     *
      * @param ipRequest
      * @return
      * @throws IOException
      */
     @RequestMapping("/submitMail")
-    public BaseResponse<JSONObject> submitMails(HttpServletRequest ipRequest,MultipartFile file) throws IOException{
+    public BaseResponse<JSONObject> submitMails(HttpServletRequest ipRequest, MultipartFile file) throws IOException {
         JSONObject json = new JSONObject();
         File localFile = File.createTempFile("temp", null);
         String fileName = System.currentTimeMillis() / 1000 + "-" + file.getOriginalFilename();
-        String receiver="1494805234@qq.com";
+        String receiver = "1494805234@qq.com";
         try {
             file.transferTo(localFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            emailService.sendAttachmentsMail(receiver,file.getOriginalFilename(),"这是Java体系图",localFile,fileName);
+            emailService.sendAttachmentsMail(receiver, file.getOriginalFilename(), "这是Java体系图", localFile, fileName);
             String ip = ipAdd.getIpAddress(ipRequest);
             String cityInfo = ipAddress.getCityInfo(ip);
-            json.put("ip",ip);
-            json.put("cityInfo",cityInfo);
-            json.put("receiver",receiver);
+            json.put("ip", ip);
+            json.put("cityInfo", cityInfo);
+            json.put("receiver", receiver);
         } catch (MessagingException e) {
             e.printStackTrace();
-            return ResultUtils.error(-1,"邮件上传失败");
+            return ResultUtils.error(-1, "邮件上传失败");
         }
         return ResultUtils.success(json);
     }

@@ -1,4 +1,4 @@
-package com.mall_of329.service;
+package com.mall_of329.util;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.exception.CosClientException;
@@ -31,13 +31,14 @@ public class TencentCosManager {
     /**
      * 存储路径
      */
-    private final  String originPath = "prod".equals(currentEnv) ? "father/img" : "father/test/img";
+    private final String originPath = "prod".equals(currentEnv) ? "father/img" : "father/test/img";
 
     @Resource
     private COSClient cosClient;
 
     /**
      * 上传文件到腾讯Cos
+     *
      * @param fileName
      * @param file
      * @return 文件URL
