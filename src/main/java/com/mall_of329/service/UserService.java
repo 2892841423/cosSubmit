@@ -1,5 +1,6 @@
 package com.mall_of329.service;
 
+import com.mall_of329.entity.Malls;
 import com.mall_of329.entity.User;
 
 import java.util.List;
@@ -60,6 +61,13 @@ public interface UserService {
      * @return 影响行数
      */
     User queryByMail(String mail);
+    /**
+     * 通过id查询商铺
+     *
+     * @param id 用户id
+     * @return 影响行数
+     */
+    List<Malls> queryMallsById(String id);
 
     /*
      *获取验证码并验证码缓存

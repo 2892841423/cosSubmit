@@ -1,6 +1,8 @@
 package com.mall_of329.service;
 
 import com.mall_of329.entity.Malls;
+import com.mall_of329.entity.Products;
+
 import java.util.List;
 
 /**
@@ -51,6 +53,13 @@ public interface MallsService {
      * @return 是否成功
      */
     boolean deleteById(String id);
+    /**
+     * 通过商铺id查询商品
+     *
+     * @param id 主键
+     * @return 商铺
+     */
+    List<Products> queryProductsById(String id);
 
 
 

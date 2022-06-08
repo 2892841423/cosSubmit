@@ -1,5 +1,6 @@
 package com.mall_of329.service.impl;
 
+import com.mall_of329.entity.Malls;
 import com.mall_of329.entity.User;
 import com.mall_of329.dao.UserDao;
 import com.mall_of329.service.UserService;
@@ -95,6 +96,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryByMail(String mail) {
         return this.userDao.queryByMail(mail);
+    }
+    /**
+     * 通过id查询商铺
+     *
+     * @param id 用户id
+     * @return 影响行数
+     */
+    @Override
+    public List<Malls> queryMallsById(String id) {
+        return userDao.queryMallsById(id);
     }
 
     /**
