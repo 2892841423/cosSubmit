@@ -76,4 +76,16 @@ public class MallsServiceImpl implements MallsService {
     public boolean deleteById(String id) {
         return this.mallsDao.deleteById(id) > 0;
     }
+
+
+    /**
+     * 通过UserId 查询所有店铺信息
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+//    @Override
+//    public boolean queryByUserId(String id) {
+//        return this.mallsDao.deleteById(id) > 0;
+//    }
 }

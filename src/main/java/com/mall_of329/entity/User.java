@@ -1,5 +1,7 @@
 package com.mall_of329.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,8 +10,10 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-06-05 22:41:33
  */
+@Data
 public class User implements Serializable {
     private static final long serialVersionUID = -17364854336143436L;
+
     /**
     * 商品主键id
     */
@@ -35,6 +39,12 @@ public class User implements Serializable {
     
     private String password;
 
+    public User(String mail) {
+        this.mail = mail;
+    }
+    public  User(){
+
+    }
 
     public String getId() {
         return id;

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.Random;
 
 /**
  * @author huangRong
@@ -27,21 +28,43 @@ public class mailSend {
     @Value("${spring.mail.username}")
     private String from;
 
-    public void sendAttachmentsMail(String to, String subject, String content, File file,String fileName) throws MessagingException {
+    /**
+     * 携带附件
+     */
+    public void sendAttachmentsMail(String to, String subject, String content, File file, String fileName) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message,true);
+            messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setFrom(from);
             messageHelper.setTo(to);
             messageHelper.setSubject(subject);
-            messageHelper.setText(content,true);
+            messageHelper.setText(content, true);
             //携带附件
-            messageHelper.addAttachment(fileName,file);
+            messageHelper.addAttachment(fileName, file);
             javaMailSender.send(message);
-//            logger.info("邮件加附件发送成功！");
         } catch (MessagingException e) {
 //            logger.error("发送失败："+e);
         }
     }
+
+
+    /*
+     *发送验证码
+     */
+    public void sendVerificationCode(String to, String Verification) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper;
+        try {
+
+            messageHelper = new MimeMessageHelper(message, true);
+            messageHelper.setFrom(from);
+            messageHelper.setTo(to);
+            messageHelper.setText("【329Shop】 您的验证码为：" + Verification + ",有效时间为30分钟。", true);
+            javaMailSender.send(message);
+        } catch (MessagingException e) {
+//            logger.error("发送失败："+e);
+        }
+    }
+
 }

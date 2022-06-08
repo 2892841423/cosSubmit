@@ -3,10 +3,15 @@ package com.mall_of329.service.impl;
 import com.mall_of329.entity.User;
 import com.mall_of329.dao.UserDao;
 import com.mall_of329.service.UserService;
+import net.jodah.expiringmap.ExpirationPolicy;
+import net.jodah.expiringmap.ExpiringMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * (User)表服务实现类
@@ -18,6 +23,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+
+    private final ExpiringMap<String, String> map = ExpiringMap.builder()
+            .maxSize(1000000)
+            .expiration(100, TimeUnit.SECONDS)
+            .variableExpiration().expirationPolicy(ExpirationPolicy.CREATED).build();
 
     /**
      * 通过ID查询单条数据
@@ -85,5 +95,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryByMail(String mail) {
         return this.userDao.queryByMail(mail);
+    }
+
+    /**
+     * 生成验证码并设置验证码过期时间
+     */
+    @Override
+    public String captchaCache(String mail) {
+        Random random = new Random();
+        String Verification = "";
+        for (int i = 0; i < 6; i++) {
+            Verification += random.nextInt(10);
+        }
+        map.put(mail,Verification);
+
+        return Verification;
+    }
+
+    @Override
+    public String cacheTheVerificationCode(String mail) {
+
+        System.out.println(mail);
+        System.out.println(map.get(mail));
+        return map.get(mail);
     }
 }

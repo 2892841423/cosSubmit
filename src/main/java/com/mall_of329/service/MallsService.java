@@ -52,4 +52,7 @@ public interface MallsService {
      */
     boolean deleteById(String id);
 
+
+
+
 }

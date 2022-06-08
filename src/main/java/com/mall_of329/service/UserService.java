@@ -1,6 +1,7 @@
 package com.mall_of329.service;
 
 import com.mall_of329.entity.User;
+
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface UserService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<User> queryAllByLimit(int offset, int limit);
@@ -51,6 +52,7 @@ public interface UserService {
      * @return 是否成功
      */
     boolean deleteById(String id);
+
     /**
      * 通过邮箱查询
      *
@@ -58,5 +60,17 @@ public interface UserService {
      * @return 影响行数
      */
     User queryByMail(String mail);
+
+    /*
+     *获取验证码并验证码缓存
+     */
+    String captchaCache(String mail);
+
+    /**
+     * 从缓存获取验证码
+     *
+     * @return
+     */
+    String cacheTheVerificationCode(String mail);
 
 }

@@ -60,7 +60,7 @@
     </select>
     <!--通过mail查询password-->
     <select id="queryByMail" resultType="com.mall_of329.entity.User">
-        select * from user where mail=#{mail}
+        select * from mall_of_329.user where mail=#{mail}
     </select>
 
     <!--新增所有列-->

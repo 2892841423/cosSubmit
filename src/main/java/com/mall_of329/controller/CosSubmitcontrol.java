@@ -1,4 +1,4 @@
-package com.mall_of329.control;
+package com.mall_of329.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mall_of329.base.BaseResponse;

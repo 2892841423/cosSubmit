@@ -7,7 +7,7 @@ server:
   port: 8080
 spring:
   datasource:
-    password: roo
+    password: 430124hr
     url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
   profiles:
@@ -20,7 +20,7 @@ spring:
     protocol: smtp
     default-encoding: UTF-8
     username: 2468805105@qq.com
-    password: livwjxgrlbynebgf
+    password: obnikdmmsbxhecie
     test-connection: true
     properties:
       mail:
