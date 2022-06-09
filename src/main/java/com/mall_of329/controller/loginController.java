@@ -7,6 +7,7 @@ import com.mall_of329.entity.User;
 import com.mall_of329.service.UserService;
 import com.mall_of329.util.TencentCosManager;
 import com.mall_of329.util.mailSend;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,8 +29,12 @@ public class loginController {
 
     @Resource
     private mailSend emailService;
+
+//    @Resource
+//    private TencentCosManager tencentCosManager;
+
     @Resource
-    private TencentCosManager tencentCosManager;
+    private JavaMailSender javaMailSender;
 
     @Resource
     private com.mall_of329.service.MallsService MallsService;
@@ -44,7 +49,7 @@ public class loginController {
      * @return 单条数据
      */
     @PostMapping("/common")
-    public BaseResponse<String> login(@RequestBody(required=false) JSONObject data) {
+    public BaseResponse<String> login(@RequestBody(required = false) JSONObject data) {
         Object username = data.get("username");
         Object password = data.get("password");
         User user1 = UserService.queryByMail(username.toString());
@@ -65,13 +70,14 @@ public class loginController {
      * @param mail 主键
      * @return 单条数据
      */
-    @RequestMapping("/verificationLogin")
+    @PostMapping("/verificationLogin")
     //@RequestParam("mail") @RequestParam("verification")
-    public BaseResponse<User> verificationLogin(String mail,
-                                                String verification) {
-        User user1 = UserService.queryByMail(mail);
+    public BaseResponse<User> verificationLogin(@RequestBody(required = false) JSONObject data) {
+        Object mail = data.get("mail");
+        Object verification = data.get("verification");
+        User user1 = UserService.queryByMail(mail.toString());
         if (user1 != null) {
-            if (UserService.cacheTheVerificationCode(mail).equals(verification)) {
+            if (UserService.cacheTheVerificationCode(mail.toString()).equals(verification)) {
                 return ResultUtils.success(user1);
             } else {
                 return ResultUtils.error(0, "验证码错误或者失效");
@@ -83,22 +89,29 @@ public class loginController {
     /**
      * 注册
      *
-     * @param mail 主键
+     * @param data 主键
      * @return 单条数据
      */
     @PostMapping("/register")
-    public BaseResponse<User> registered(@RequestParam("mail") String mail,
-                                         @RequestParam("password") String password,
-                                         @RequestParam("verification") String verification) {
-
+    public BaseResponse<User> registered1(@RequestBody(required = false) JSONObject data) {
+        String mail = data.get("mail").toString();
+        String verification = data.get("verification").toString();
+        String password = data.get("password").toString();
+        if (UserService.cacheTheVerificationCode(mail) == null)
+            return ResultUtils.error(1, "验证码错误！！！");
         JSONObject json = new JSONObject();
+
         User user = UserService.queryByMail(mail);
         if (user == null) {
             User newUser = new User();
             newUser.setPassword(password);
             newUser.setMail(mail);
             newUser.setUsername(mail);
+            id++;
             newUser.setId(id + "");
+            newUser.setAlipay(mail);
+            newUser.setCall(mail);
+            newUser.setContactaddress(mail);
             UserService.insert(newUser);
             return ResultUtils.success(newUser);
         } else {
@@ -113,8 +126,9 @@ public class loginController {
      * @param mail 主键
      * @return 单条数据
      */
-    @RequestMapping("/verification")
-    public BaseResponse<String> registered(String mail) {
+    @PostMapping("/verification")
+    public BaseResponse<String> registered(@RequestBody(required = false) JSONObject data) {
+        String mail = data.get("mail").toString();
         try {
             String verification = UserService.captchaCache(mail);
             emailService.sendVerificationCode(mail, verification);
