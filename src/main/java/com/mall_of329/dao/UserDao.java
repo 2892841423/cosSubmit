@@ -1,5 +1,6 @@
 package com.mall_of329.dao;
 
+import com.mall_of329.entity.Malls;
 import com.mall_of329.entity.User;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -68,6 +69,13 @@ public interface UserDao {
      * @return 影响行数
      */
     User queryByMail(String mail);
+    /**
+     * 通过id查询商铺
+     *
+     * @param id 用户id
+     * @return 影响行数
+     */
+    List<Malls> queryMallsById(String id);
 
 
 }

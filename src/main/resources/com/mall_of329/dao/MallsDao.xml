@@ -50,6 +50,12 @@
             </if>
         </where>
     </select>
+    <select id="queryProductsById" resultType="com.mall_of329.entity.Products">
+        select
+            id, goodsName, introduction, price, rest, photo, sales, mallId
+        from mall_of_329.products
+        where mall_of_329.products.id = #{id}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

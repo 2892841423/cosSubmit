@@ -1,6 +1,7 @@
 package com.mall_of329.dao;
 
 import com.mall_of329.entity.Malls;
+import com.mall_of329.entity.Products;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -61,5 +62,12 @@ public interface MallsDao {
      * @return 影响行数
      */
     int deleteById(String id);
+    /**
+     * 通过商铺id查询商品
+     *
+     * @param id 主键
+     * @return 商铺
+     */
+    List<Products> queryProductsById(String id);
 
 }

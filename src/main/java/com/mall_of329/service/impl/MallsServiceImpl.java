@@ -2,6 +2,7 @@ package com.mall_of329.service.impl;
 
 import com.mall_of329.entity.Malls;
 import com.mall_of329.dao.MallsDao;
+import com.mall_of329.entity.Products;
 import com.mall_of329.service.MallsService;
 import org.springframework.stereotype.Service;
 
@@ -76,14 +77,17 @@ public class MallsServiceImpl implements MallsService {
     public boolean deleteById(String id) {
         return this.mallsDao.deleteById(id) > 0;
     }
-
-
     /**
-     * 通过UserId 查询所有店铺信息
+     * 通过商铺id查询商品
      *
      * @param id 主键
-     * @return 是否成功
+     * @return 商铺
      */
+    @Override
+    public List<Products> queryProductsById(String id){
+        return mallsDao.queryProductsById(id);
+    }
+
 //    @Override
 //    public boolean queryByUserId(String id) {
 //        return this.mallsDao.deleteById(id) > 0;
