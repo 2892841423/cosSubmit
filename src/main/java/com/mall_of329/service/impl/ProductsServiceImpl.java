@@ -76,4 +76,12 @@ public class ProductsServiceImpl implements ProductsService {
     public boolean deleteById(String id) {
         return this.productsDao.deleteById(id) > 0;
     }
+    /**
+     * 查询最后一个数据
+     *
+     * @return 最后一个产品
+     */
+    public Products queryLast(){
+        return this.queryLast();
+    }
 }

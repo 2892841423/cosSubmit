@@ -51,5 +51,11 @@ public interface ProductsService {
      * @return 是否成功
      */
     boolean deleteById(String id);
+    /**
+     * 查询最后一个数据
+     *
+     * @return 最后一个产品
+     */
+    Products queryLast();
 
 }

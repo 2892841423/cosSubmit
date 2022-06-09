@@ -86,6 +86,7 @@ public class MallsServiceImpl implements MallsService {
     @Override
     public List<Products> queryProductsById(String id){
         return mallsDao.queryProductsById(id);
+
     }
 
 //    @Override

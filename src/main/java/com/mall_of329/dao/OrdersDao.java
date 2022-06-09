@@ -1,17 +1,16 @@
 package com.mall_of329.dao;
 
-import com.mall_of329.entity.Malls;
-import com.mall_of329.entity.Products;
+import com.mall_of329.entity.Orders;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * (Malls)表数据库访问层
+ * (Orders)表数据库访问层
  *
  * @author makejava
- * @since 2022-06-05 22:11:16
+ * @since 2022-06-09 13:24:19
  */
-public interface MallsDao {
+public interface OrdersDao {
 
     /**
      * 通过ID查询单条数据
@@ -19,7 +18,7 @@ public interface MallsDao {
      * @param id 主键
      * @return 实例对象
      */
-    Malls queryById(String id);
+    Orders queryById(String id);
 
     /**
      * 查询指定行数据
@@ -28,32 +27,32 @@ public interface MallsDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Malls> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Orders> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param malls 实例对象
+     * @param orders 实例对象
      * @return 对象列表
      */
-    List<Malls> queryAll(Malls malls);
+    List<Orders> queryAll(Orders orders);
 
     /**
      * 新增数据
      *
-     * @param malls 实例对象
+     * @param orders 实例对象
      * @return 影响行数
      */
-    int insert(Malls malls);
+    int insert(Orders orders);
 
     /**
      * 修改数据
      *
-     * @param malls 实例对象
+     * @param orders 实例对象
      * @return 影响行数
      */
-    int update(Malls malls);
+    int update(Orders orders);
 
     /**
      * 通过主键删除数据
@@ -62,18 +61,5 @@ public interface MallsDao {
      * @return 影响行数
      */
     int deleteById(String id);
-    /**
-     * 通过商铺id查询商品
-     *
-     * @param id 主键
-     * @return 商铺
-     */
-    List<Products> queryProductsById(String id);
-    /**
-     * 查询最后一个数据
-     *
-     * @return 最后一个产品
-     */
-    Products queryLast();
 
 }

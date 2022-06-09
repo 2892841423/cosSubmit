@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.mall_of329.dao.OrdersDao">
+
+    <resultMap id="BaseResultMap" type="com.mall_of329.entity.Orders">
+        <!--@Table orders-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="money" column="money" jdbcType="INTEGER"/>
+        <result property="date" column="date" jdbcType="VARCHAR"/>
+        <result property="userid" column="userId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, name, money, date, userId
+        from mall_of_329.orders
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, name, money, date, userId
+        from mall_of_329.orders
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, name, money, date, userId
+        from mall_of_329.orders
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="money != null">
+                and money = #{money}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="userid != null and userid != ''">
+                and userId = #{userid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mall_of_329.orders(name, money, date, userId)
+        values (#{name}, #{money}, #{date}, #{userid})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mall_of_329.orders
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="date != null and date != ''">
+                date = #{date},
+            </if>
+            <if test="userid != null and userid != ''">
+                userId = #{userid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from mall_of_329.orders where id = #{id}
+    </delete>
+
+</mapper>

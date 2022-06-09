@@ -68,6 +68,12 @@
         from mall_of_329.malls
         where mall_of_329.malls.id = #{id}
     </select>
+    <select id="queryOrdersById" resultType="com.mall_of329.entity.Orders">
+        select
+            id, name, money, date, userId
+        from mall_of_329.orders
+        where id = #{id}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
